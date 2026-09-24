@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moment - Pedido Confirmado</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+      padding: 40px 20px;
+    }
+    .receipt-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    .receipt-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .receipt-header h1 {
+      font-family: 'Akira Expanded', sans-serif;
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+    .receipt-header p {
+      color: #27ae60;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    /* Estilização da Tabela */
+    .summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .summary-table th, .summary-table td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 14px 18px;
+      font-size: 15px;
+    }
+    .summary-table th {
+      background-color: #000000;
+      color: #ffffff;
+      font-family: 'Akira Expanded', sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+    .summary-table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    .btn-voltar {
+      display: inline-block;
+      margin-top: 30px;
+      font-family: 'Akira Expanded', sans-serif;
+      font-size: 14px;
+      background: #000;
+      color: #fff;
+      padding: 12px 24px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .btn-voltar:hover {
+      background: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="receipt-container">
+    <div class="receipt-header">
+      <h1>MOMENT</h1>
+      <p>✓ Pedido Realizado com Sucesso!</p>
+    </div>
+
+    <h2>Detalhes do Pedido</h2>
+    
+    <!-- Tabela com Resumo -->
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th>Campo</th>
+          <th>Informação do Pedido</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Camisa</strong></td>
+          <td id="td-produto">-</td>
+        </tr>
+        <tr>
+          <td><strong>Tamanho</strong></td>
+          <td id="td-tamanho">-</td>
+        </tr>
+        <tr>
+          <td><strong>Valor</strong></td>
+          <td id="td-preco">-</td>
+        </tr>
+        <tr>
+          <td><strong>E-mail</strong></td>
+          <td id="td-email">-</td>
+        </tr>
+        <tr>
+          <td><strong>Telefone</strong></td>
+          <td id="td-telefone">-</td>
+        </tr>
+        <tr>
+          <td><strong>Endereço de Entrega</strong></td>
+          <td id="td-endereco">-</td>
+        </tr>
+        <tr>
+          <td><strong>Forma de Pagamento</strong></td>
+          <td id="td-pagamento">-</td>
+        </tr>
+        <tr>
+          <td><strong>Data da Compra</strong></td>
+          <td id="td-data">-</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="text-align: center;">
+      <a href="produto.html" class="btn-voltar">Voltar para a Loja</a>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Carregar os dados salvos do localStorage
+      const compra = JSON.parse(localStorage.getItem('moment_compra_finalizada') || '{}');
+
+      if (!compra.email) {
+        alert('Nenhum pedido recente encontrado.');
+        window.location.href = 'produto.html';
+        return;
+      }
+
+      // Preencher a tabela
+      document.getElementById('td-produto').innerText = compra.produtoNome;
+      document.getElementById('td-tamanho').innerText = compra.tamanho;
+      document.getElementById('td-preco').innerText = compra.preco;
+      document.getElementById('td-email').innerText = compra.email;
+      document.getElementById('td-telefone').innerText = compra.telefone;
+      document.getElementById('td-endereco').innerText = compra.endereco;
+      document.getElementById('td-pagamento').innerText = compra.pagamento;
+      document.getElementById('td-data').innerText = compra.data;
+    });
+  </script>
+</body>
+</html>

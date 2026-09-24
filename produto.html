@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moment - Detalhes do Produto</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- SDK do Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <div class="page-container">
+    <h1 style="font-family: 'Akira Expanded', sans-serif; font-size: 96px; font-weight: 800; margin-left: 384px;">
+      moment
+    </h1>
+    
+    <div style="align-items: center; display: flex; margin-top: 56px;">
+      
+      <!-- Container da Imagem Reestilizado com Badge e Botão Flutuante -->
+      <div class="product-image-card">
+        <!-- Tag flutuante mostrando a vista atual (Frente / Costas) -->
+        <span id="view-badge" class="view-badge">Frente</span>
+
+        <div class="image-wrapper">
+          <img id="product-img" class="product-img" src="" alt="Foto da Camisa" />
+        </div>
+
+        <!-- Botão Seta Flutuante (Alterna entre Frente e Costas) -->
+        <button id="btn-toggle-img" class="btn-toggle-floating" type="button" aria-label="Alternar vista da imagem">
+          <svg width="10" height="16" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 11L6 6L1 1" stroke="#1E1E1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Detalhes do Produto -->
+      <div style="margin-left: 28px;">
+        <h3 id="product-name" style="font-family: 'Akira Expanded', sans-serif; font-size: 20px; font-weight: 800; text-transform: uppercase;">
+          Carregando...
+        </h3>
+
+        <div style="align-items: center; display: flex; margin: 80px 0 0 8px;">
+          <h3 id="product-price" style="font-family: 'Akira Expanded', sans-serif; font-size: 20px; font-weight: 800;">
+            R$ 0,00
+          </h3>
+          <h3 id="product-installments" style="font-family: 'Akira Expanded', sans-serif; font-size: 20px; font-weight: 800; margin-left: 224px;">
+            ou 3x de R$ 0,00
+          </h3>
+        </div>
+
+        <div style="margin: 56px 0 0 4px;">
+          <svg width="669" height="1" viewBox="0 0 669 1" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0.5H669" stroke="black" />
+          </svg>
+        </div>
+
+        <h3 style="font-family: 'Akira Expanded', sans-serif; font-size: 20px; font-weight: 800; margin: 64px 0 0 8px;">
+          Frete grátis a partir de R$ 299,00
+        </h3>
+
+        <!-- Seleção de Tamanho -->
+        <div style="margin: 64px 0 0 14px;">
+          <h3 style="font-family: 'Akira Expanded', sans-serif; font-size: 20px; font-weight: 800;">
+            tamanho: <span id="selected-size-text" style="font-size: 16px; color: #666; margin-left: 8px;"></span>
+          </h3>
+
+          <div id="sizes-container" style="display: flex; gap: 12px; margin-top: 16px;">
+            <button type="button" class="btn-size" data-size="P">P</button>
+            <button type="button" class="btn-size" data-size="M">M</button>
+            <button type="button" class="btn-size" data-size="G">G</button>
+            <button type="button" class="btn-size" data-size="GG">GG</button>
+          </div>
+          
+          <!-- Mensagem de erro/aviso caso tente avançar sem tamanho -->
+          <p id="size-warning" style="color: #e74c3c; font-family: sans-serif; font-size: 14px; margin-top: 10px; display: none;">
+            Por favor, selecione um tamanho antes de prosseguir.
+          </p>
+        </div>
+
+        <!-- Botões de Ação Principais -->
+        <div style="align-items: center; display: flex; margin: 40px 0 0 14px; gap: 32px;">
+          <button type="button" class="btn-comprar">
+            Comprar
+          </button>
+          <button type="button" class="btn-carrinho">
+            ad. ao carrinho
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="produto.js"></script>
+</body>
+</html>

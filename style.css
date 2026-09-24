@@ -1,0 +1,326 @@
+/* ==========================================
+   1. FONTES E CONFIGURAÇÕES GERAIS
+   ========================================== */
+@font-face {
+  font-family: 'Akira Expanded';
+  src: url('AkiraExpanded.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #ffffff;
+  color: #000000;
+  min-height: 100vh;
+}
+
+.page-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* ==========================================
+   2. HEADER & NAVEGAÇÃO (PÁGINA INICIAL)
+   ========================================== */
+.header {
+  padding: 20px 0;
+}
+
+.logo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.logo h1 {
+  font-family: 'Akira Expanded', sans-serif;
+  font-size: 80px;
+  font-weight: 800;
+  text-transform: lowercase;
+}
+
+.logo .registered-mark {
+  font-family: 'Akira Expanded', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  border: 1px solid #000;
+  border-radius: 50%;
+  padding: 2px 4px;
+  margin-left: 8px;
+  margin-top: 15px;
+}
+
+.nav-bar {
+  background-color: #d9d9d9;
+  padding: 16px 0;
+}
+
+.nav-bar ul {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  list-style: none;
+}
+
+.nav-bar a {
+  font-family: 'Akira Expanded', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: #000000;
+  text-decoration: none;
+}
+
+/* ==========================================
+   3. HERO & CARDS DE PRODUTO (VITRINE)
+   ========================================== */
+.hero-section {
+  background-color: #000000;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 40px 80px 40px 40px;
+}
+
+.cards-scroll-container {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  width: 100%;
+  padding: 20px 10px;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.cards-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.loading-text {
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.product-card {
+  min-width: 260px;
+  width: 260px;
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+}
+
+.card-image {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+
+.card-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s ease;
+}
+
+.card-image .img-back {
+  opacity: 0;
+}
+
+.product-card:hover .img-back {
+  opacity: 1;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.product-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 900;
+  color: #000;
+}
+
+.btn-arrow {
+  position: absolute;
+  right: 20px;
+  background: #ffffff;
+  border: 1px solid #303030;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* ==========================================
+   4. PÁGINA DE DETALHES DO PRODUTO (produto.html)
+   ========================================== */
+.product-image-card {
+  position: relative;
+  background: #343434;
+  border-radius: 39px;
+  padding: 80px 74px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.view-badge {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  font-family: 'Akira Expanded', sans-serif;
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.image-wrapper {
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.product-img {
+  width: 384px;
+  height: 447px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border-radius: 8px;
+  transition: opacity 0.2s ease-in-out;
+  display: block;
+}
+
+.btn-toggle-floating {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-toggle-floating:hover {
+  transform: scale(1.08);
+  background-color: #f0f0f0;
+}
+
+.btn-toggle-floating:active {
+  transform: scale(0.95);
+}
+
+.btn-size {
+  min-width: 52px;
+  height: 44px;
+  padding: 0 16px;
+  border: 2px solid #1e1e1e;
+  background: transparent;
+  color: #1e1e1e;
+  font-family: 'Akira Expanded', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-size:hover {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.btn-size.active {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+.btn-comprar {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  font-family: 'Akira Expanded', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 18px 48px;
+  border: 2px solid #1e1e1e;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-comprar:hover {
+  background-color: transparent;
+  color: #1e1e1e;
+  transform: translateY(-2px);
+}
+
+.btn-carrinho {
+  background-color: transparent;
+  color: #1e1e1e;
+  font-family: 'Akira Expanded', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 18px 36px;
+  border: 2px solid #1e1e1e;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-carrinho:hover {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  transform: translateY(-2px);
+}

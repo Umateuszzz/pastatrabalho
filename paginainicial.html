@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moment Store</title>
+  
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- SDK do Supabase JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <!-- Cabeçalho com Logo -->
+  <header class="header">
+    <div class="logo">
+      <h1>moment</h1>
+      <span class="registered-mark">r</span>
+    </div>
+  </header>
+
+  <!-- Navegação -->
+  <nav class="nav-bar">
+    <ul>
+      <li><a href="#">SHOP</a></li>
+      <li><a href="#">COLLECTION</a></li>
+      <li><a href="#">ABOUT US</a></li>
+    </ul>
+  </nav>
+
+  <!-- Área Preta Principal com Rolagem de Cards -->
+  <main class="hero-section">
+    <!-- Container que receberá os cards do Supabase -->
+    <div id="cards-container" class="cards-scroll-container">
+      <p class="loading-text">Carregando produtos...</p>
+    </div>
+
+    <!-- Botão de seta original -->
+    <button aria-label="Avançar" class="btn-arrow">
+      <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 11L6 6L1 1" stroke="#1E1E1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </main>
+
+  <!-- Script de Conexão com Supabase -->
+  <script src="app.js"></script>
+</body>
+</html>

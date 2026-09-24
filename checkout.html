@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moment - Checkout</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- SDK do Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <style>
+    body {
+      background-color: #f9f9f9;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 40px 20px;
+    }
+    .checkout-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+    .checkout-title {
+      font-family: 'Akira Expanded', sans-serif;
+      font-size: 32px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+    }
+    .form-section {
+      margin-bottom: 24px;
+    }
+    .form-section h3 {
+      font-family: 'Akira Expanded', sans-serif;
+      font-size: 16px;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #000;
+      padding-bottom: 8px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      font-weight: bold;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+    .form-group input, .form-group select {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+    .form-row {
+      display: flex;
+      gap: 16px;
+    }
+    .form-row .form-group {
+      flex: 1;
+    }
+    .btn-finalizar {
+      font-family: 'Akira Expanded', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      background-color: #000000;
+      color: #ffffff;
+      border: 2px solid #000000;
+      padding: 16px;
+      width: 100%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+    .btn-finalizar:hover {
+      background-color: transparent;
+      color: #000000;
+    }
+    .btn-finalizar:disabled {
+      background-color: #666;
+      border-color: #666;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="checkout-container">
+    <h1 class="checkout-title">MOMENT - CHECKOUT</h1>
+
+    <form id="checkout-form">
+      <!-- Dados Pessoais e Contato -->
+      <div class="form-section">
+        <h3>1. Dados de Contato</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">E-mail *</label>
+            <input type="email" id="email" required placeholder="seuemail@exemplo.com">
+          </div>
+          <div class="form-group">
+            <label for="telefone">Telefone / WhatsApp *</label>
+            <input type="tel" id="telefone" required placeholder="(11) 99999-9999">
+          </div>
+        </div>
+      </div>
+
+      <!-- Endereço de Entrega -->
+      <div class="form-section">
+        <h3>2. Endereço de Entrega</h3>
+        <div class="form-row">
+          <div class="form-group" style="flex: 2;">
+            <label for="rua">Rua / Avenida *</label>
+            <input type="text" id="rua" required placeholder="Ex: Av. Paulista">
+          </div>
+          <div class="form-group" style="flex: 1;">
+            <label for="numero">Número *</label>
+            <input type="text" id="numero" required placeholder="123">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="bairro">Bairro *</label>
+            <input type="text" id="bairro" required placeholder="Centro">
+          </div>
+          <div class="form-group">
+            <label for="cidade">Cidade *</label>
+            <input type="text" id="cidade" required placeholder="São Paulo">
+          </div>
+          <div class="form-group" style="flex: 0.5;">
+            <label for="uf">UF *</label>
+            <input type="text" id="uf" maxlength="2" required placeholder="SP">
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagamento -->
+      <div class="form-section">
+        <h3>3. Forma de Pagamento</h3>
+        <div class="form-group">
+          <label for="pagamento">Escolha a opção *</label>
+          <select id="pagamento" required>
+            <option value="Pix">Pix (Aprovação Instantânea)</option>
+            <option value="Cartão de Crédito">Cartão de Crédito</option>
+            <option value="Boleto">Boleto Bancário</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" id="btn-submit" class="btn-finalizar">Confirmar e Pagar</button>
+    </form>
+  </div>
+
+  <script>
+    // Inicialização do Supabase Client
+    const SUPABASE_URL = 'https://oszspwukqeksytxfcvkh.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9zenNwd3VrcWVrc3l0eGZjdmtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAyNjk2MTYsImV4cCI6MjEwNTg0NTYxNn0.HzuuFQ2B3Rl3L07yn5C5qva4C9aWrPtf9WY1kUfx4hI';
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    document.getElementById('checkout-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const btnSubmit = document.getElementById('btn-submit');
+      btnSubmit.disabled = true;
+      btnSubmit.innerText = 'A PROCESSAR...';
+
+      // Recupera informações da camisa salvas no produto.html
+      const itemSalvo = JSON.parse(localStorage.getItem('moment_item') || '{}');
+
+      const novoPedido = {
+        produto_nome: itemSalvo.nome || 'Camisa Moment Oversized',
+        tamanho: itemSalvo.tamanho || 'M',
+        preco: itemSalvo.preco || 'R$ 150,00',
+        email: document.getElementById('email').value,
+        telefone: document.getElementById('telefone').value,
+        endereco: `${document.getElementById('rua').value}, ${document.getElementById('numero').value} - ${document.getElementById('bairro').value}, ${document.getElementById('cidade').value}/${document.getElementById('uf').value.toUpperCase()}`,
+        pagamento: document.getElementById('pagamento').value
+      };
+
+      // 1. Insere o pedido na tabela 'pedidos' do Supabase
+      const { data, error } = await supabaseClient
+        .from('pedidos')
+        .insert([novoPedido])
+        .select()
+        .single();
+
+      if (error) {
+        console.error('Erro ao guardar pedido no Supabase:', error);
+        alert('Ocorreu um erro ao processar a compra. Tente novamente.');
+        btnSubmit.disabled = false;
+        btnSubmit.innerText = 'Confirmar e Pagar';
+        return;
+      }
+
+      // 2. Guarda o pedido registado com o ID gerado pelo banco de dados
+      const compraCompleta = {
+        ...novoPedido,
+        id: data.id,
+        data: new Date(data.created_at || Date.now()).toLocaleDateString('pt-BR')
+      };
+
+      localStorage.setItem('moment_compra_finalizada', JSON.stringify(compraCompleta));
+
+      // 3. Redireciona para o resumo da compra
+      window.location.href = 'resumo-compra.html';
+    });
+  </script>
+</body>
+</html>
