@@ -1,7 +1,7 @@
 // Configurações do Supabase
 const SUPABASE_URL = 'https://oszspwukqeksytxfcvkh.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9zenNwd3VrcWVrc3l0eGZjdmtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAyNjk2MTYsImV4cCI6MjEwNTg0NTYxNn0.HzuuFQ2B3Rl3L07yn5C5qva4C9aWrPtf9WY1kUfx4hI';
-const BUCKET_NAME = 'camisas'; // Nome do bucket no Supabase Storage
+const BUCKET_NAME = 'camisas';
 
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -9,7 +9,7 @@ const form = document.getElementById('product-form');
 const btnSubmit = document.getElementById('btn-submit');
 const statusMessage = document.getElementById('status-message');
 
-// Função auxiliar para upload de imagem no Storage
+// upload
 async function uploadImagem(file, sufixo) {
   const fileName = `${Date.now()}_${sufixo}_${file.name}`;
   
@@ -42,13 +42,13 @@ form.addEventListener('submit', async (e) => {
   const fileCostas = document.getElementById('imagem_costas').files[0];
 
   try {
-    // 1. Upload da imagem da frente e das costas simultaneamente
+    // 1. Upload frente e costas
     const [urlFrente, urlCostas] = await Promise.all([
       uploadImagem(fileFrente, 'frente'),
       uploadImagem(fileCostas, 'costas')
     ]);
 
-    // 2. Insere na tabela 'produtos' com as duas URLs
+    // joga na tabela no supabase
     const { error: insertError } = await supabaseClient
       .from('produtos')
       .insert([
