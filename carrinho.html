@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Moment - Carrinho</title>
+
+  <link rel="stylesheet" href="style.css">
+
+
+
+  <style>
+
+    body {
+
+      background-color: #f9f9f9;
+
+    }
+
+    .cart-container {
+
+      max-width: 900px;
+
+      margin: 0 auto;
+
+      padding: 40px 20px 80px;
+
+    }
+
+    .cart-title {
+
+      font-family: 'Akira Expanded', sans-serif;
+
+      font-size: 32px;
+
+      text-transform: uppercase;
+
+      margin-bottom: 32px;
+
+    }
+
+    .cart-empty {
+
+      background: #fff;
+
+      border-radius: 12px;
+
+      padding: 60px 20px;
+
+      text-align: center;
+
+      color: #666;
+
+    }
+
+    .cart-empty a {
+
+      display: inline-block;
+
+      margin-top: 20px;
+
+      font-family: 'Akira Expanded', sans-serif;
+
+      font-weight: 800;
+
+      background: #000;
+
+      color: #fff;
+
+      padding: 14px 28px;
+
+      border-radius: 8px;
+
+      text-decoration: none;
+
+    }
+
+    .cart-item {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 20px;
+
+      background: #fff;
+
+      border-radius: 12px;
+
+      padding: 16px;
+
+      margin-bottom: 16px;
+
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+    }
+
+    .cart-item img {
+
+      width: 90px;
+
+      height: 105px;
+
+      object-fit: cover;
+
+      border-radius: 8px;
+
+      flex-shrink: 0;
+
+      background: #eee;
+
+    }
+
+    .cart-item-info {
+
+      flex: 1;
+
+    }
+
+    .cart-item-info h3 {
+
+      font-family: 'Akira Expanded', sans-serif;
+
+      font-size: 16px;
+
+      text-transform: uppercase;
+
+      margin-bottom: 6px;
+
+    }
+
+    .cart-item-info p {
+
+      color: #666;
+
+      font-size: 14px;
+
+      margin-bottom: 4px;
+
+    }
+
+    .cart-qty {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+    }
+
+    .cart-qty button {
+
+      width: 28px;
+
+      height: 28px;
+
+      border: 2px solid #1e1e1e;
+
+      background: transparent;
+
+      border-radius: 6px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+
+    }
+
+    .cart-item-price {
+
+      font-family: 'Akira Expanded', sans-serif;
+
+      font-weight: 800;
+
+      font-size: 16px;
+
+      min-width: 100px;
+
+      text-align: right;
+
+    }
+
+    .cart-remove {
+
+      background: none;
+
+      border: none;
+
+      color: #e74c3c;
+
+      cursor: pointer;
+
+      font-size: 13px;
+
+      font-weight: bold;
+
+      margin-top: 8px;
+
+    }
+
+    .cart-summary {
+
+      background: #fff;
+
+      border-radius: 12px;
+
+      padding: 24px;
+
+      margin-top: 24px;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+    }
+
+    .cart-summary .total-label {
+
+      font-family: 'Akira Expanded', sans-serif;
+
+      font-size: 14px;
+
+      color: #666;
+
+    }
+
+    .cart-summary .total-value {
+
+      font-family: 'Akira Expanded', sans-serif;
+
+      font-size: 28px;
+
+      font-weight: 800;
+
+    }
+
+    .btn-finalizar-carrinho {
+
+      font-family: 'Akira Expanded', sans-serif;
+
+      font-size: 16px;
+
+      font-weight: 800;
+
+      background-color: #000000;
+
+      color: #ffffff;
+
+      border: 2px solid #000000;
+
+      padding: 16px 32px;
+
+      cursor: pointer;
+
+      border-radius: 8px;
+
+      text-transform: uppercase;
+
+      text-decoration: none;
+
+      display: inline-block;
+
+    }
+
+    .btn-finalizar-carrinho:hover {
+
+      background-color: transparent;
+
+      color: #000000;
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+
+
+  <!-- Mini navegação -->
+
+  <div class="mini-nav">
+
+    <div class="mini-links">
+
+      <a href="index.html" class="mini-link">← Loja</a>
+
+      <a href="about.html" class="mini-link">About Us</a>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="cart-container">
+
+    <h1 class="cart-title">Meu Carrinho</h1>
+
+    <div id="cart-content"></div>
+
+  </div>
+
+
+
+  <script src="checkout/cart.js"></script>
+
+  <script>
+
+    function renderizarCarrinho() {
+
+      const container = document.getElementById('cart-content');
+
+      const itens = MomentCart.obter();
+
+
+
+      if (itens.length === 0) {
+
+        container.innerHTML = `
+
+          <div class="cart-empty">
+
+            <p>Seu carrinho está vazio.</p>
+
+            <a href="paginainicial.html">Ver produtos</a>
+
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+
+      let html = '';
+
+      itens.forEach((item, indice) => {
+
+        html += `
+
+          <div class="cart-item">
+
+            <img src="${item.imagem || 'https://via.placeholder.com/90x105'}" alt="${item.nome}">
+
+            <div class="cart-item-info">
+
+              <h3>${item.nome}</h3>
+
+              <p>Tamanho: ${item.tamanho || '-'}</p>
+
+              <div class="cart-qty">
+
+                <button type="button" data-acao="menos" data-indice="${indice}">-</button>
+
+                <span>${item.quantidade}</span>
+
+                <button type="button" data-acao="mais" data-indice="${indice}">+</button>
+
+              </div>
+
+              <button type="button" class="cart-remove" data-acao="remover" data-indice="${indice}">Remover</button>
+
+            </div>
+
+            <div class="cart-item-price">${MomentCart.formatarPreco(item.preco * item.quantidade)}</div>
+
+          </div>
+
+        `;
+
+      });
+
+
+
+      html += `
+
+        <div class="cart-summary">
+
+          <div>
+
+            <div class="total-label">TOTAL</div>
+
+            <div class="total-value">${MomentCart.formatarPreco(MomentCart.totalPreco())}</div>
+
+          </div>
+
+          <a href="checkout.html" class="btn-finalizar-carrinho">Finalizar Compra</a>
+
+        </div>
+
+      `;
+
+
+
+      container.innerHTML = html;
+
+
+
+      // Eventos dos botões de quantidade e remoção
+
+      container.querySelectorAll('[data-acao]').forEach((botao) => {
+
+        botao.addEventListener('click', () => {
+
+          const indice = Number(botao.getAttribute('data-indice'));
+
+          const acao = botao.getAttribute('data-acao');
+
+          const itemAtual = MomentCart.obter()[indice];
+
+          if (!itemAtual) return;
+
+
+
+          if (acao === 'mais') {
+
+            MomentCart.alterarQuantidade(indice, itemAtual.quantidade + 1);
+
+          } else if (acao === 'menos') {
+
+            MomentCart.alterarQuantidade(indice, itemAtual.quantidade - 1);
+
+          } else if (acao === 'remover') {
+
+            MomentCart.remover(indice);
+
+          }
+
+
+
+          renderizarCarrinho();
+
+        });
+
+      });
+
+    }
+
+
+
+    document.addEventListener('DOMContentLoaded', renderizarCarrinho);
+
+  </script>
+
+</body>
+
+</html>

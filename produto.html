@@ -7,6 +7,15 @@
   <link rel="stylesheet" href="style.css">
   <!-- SDK do Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <style>
+    /* Estilo para quando o tamanho está selecionado */
+    .btn-size.selecionado {
+      background-color: #000;
+      color: #fff;
+      border-color: #000;
+    }
+  </style>
 </head>
 <body>
 
@@ -78,12 +87,12 @@
           </p>
         </div>
 
-        <!-- Botões de Ação Principais -->
+        <!-- Botões de Ação Principais (Agora com IDs) -->
         <div style="align-items: center; display: flex; margin: 40px 0 0 14px; gap: 32px;">
-          <button type="button" class="btn-comprar">
+          <button type="button" id="btn-comprar-agora" class="btn-comprar">
             Comprar
           </button>
-          <button type="button" class="btn-carrinho">
+          <button type="button" id="btn-add-carrinho" class="btn-carrinho">
             ad. ao carrinho
           </button>
         </div>
@@ -92,6 +101,85 @@
     </div>
   </div>
 
+  <!-- 1. Primeiro carregamos a lógica do produto (Supabase, etc) -->
   <script src="checkout/produto.js"></script>
+  
+  <!-- 2. Depois carregamos as funções do carrinho -->
+  <script src="checkout/cart.js"></script>
+
+  <!-- 3. Finalmente, a lógica que liga esta página ao carrinho -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      let tamanhoSelecionado = null;
+      const botoesTamanho = document.querySelectorAll('.btn-size');
+      const textoTamanho = document.getElementById('selected-size-text');
+      const avisoTamanho = document.getElementById('size-warning');
+      const btnAddCarrinho = document.getElementById('btn-add-carrinho');
+      const btnComprarAgora = document.getElementById('btn-comprar-agora');
+
+      // Lógica para selecionar o tamanho
+      botoesTamanho.forEach(botao => {
+        botao.addEventListener('click', function() {
+          // Remove a classe selecionado de todos os botões
+          botoesTamanho.forEach(b => b.classList.remove('selecionado'));
+          
+          // Adiciona a classe apenas no botão clicado
+          this.classList.add('selecionado');
+          
+          // Guarda o tamanho escolhido
+          tamanhoSelecionado = this.getAttribute('data-size');
+          textoTamanho.innerText = tamanhoSelecionado;
+          
+          // Esconde o aviso de erro, se estiver visível
+          avisoTamanho.style.display = 'none';
+        });
+      });
+
+      // Função para extrair e formatar o produto para o carrinho
+      function adicionarProdutoAoCarrinho() {
+        if (!tamanhoSelecionado) {
+          avisoTamanho.style.display = 'block';
+          return false; // Interrompe a função se não tiver tamanho
+        }
+
+        // Lê o preço da tela e transforma num número (Ex: "R$ 129,90" vira 129.90)
+        let precoTexto = document.getElementById('product-price').innerText;
+        let precoNumero = parseFloat(precoTexto.replace('R$', '').replace(/\./g, '').replace(',', '.').trim()) || 0;
+
+        const produtoParaCarrinho = {
+          // Gera um ID baseado no nome e tamanho para diferenciar no carrinho
+          id: document.getElementById('product-name').innerText.trim().toLowerCase().replace(/\s/g, '-') + '-' + tamanhoSelecionado,
+          nome: document.getElementById('product-name').innerText,
+          preco: precoNumero,
+          tamanho: tamanhoSelecionado,
+          quantidade: 1,
+          imagem: document.getElementById('product-img').src
+        };
+
+        // Usa a função do seu cart.js para guardar na memória
+        MomentCart.adicionar(produtoParaCarrinho);
+        return true;
+      }
+
+      // Evento de clique: Adicionar ao Carrinho
+      btnAddCarrinho.addEventListener('click', function(e) {
+        e.preventDefault();
+        const sucesso = adicionarProdutoAoCarrinho();
+        if (sucesso) {
+          window.location.href = 'carrinho.html';
+        }
+      });
+
+      // Evento de clique: Comprar Agora
+      btnComprarAgora.addEventListener('click', function(e) {
+        e.preventDefault();
+        const sucesso = adicionarProdutoAoCarrinho();
+        if (sucesso) {
+          // O botão de comprar também leva para o carrinho (ou direto para o checkout, se preferir)
+          window.location.href = 'carrinho.html';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
