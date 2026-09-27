@@ -28,9 +28,7 @@ body {
   padding: 40px 20px;
 }
 
-/* ==========================================
-   2. HEADER & NAVEGAÇÃO (PÁGINA INICIAL)
-   ========================================== */
+/* pagina inicial */
 .header {
   padding: 20px 0;
 }
@@ -79,9 +77,7 @@ body {
   text-decoration: none;
 }
 
-/* ==========================================
-   3. HERO & CARDS DE PRODUTO (VITRINE)
-   ========================================== */
+/* vitrine */
 .hero-section {
   background-color: #000000;
   min-height: 600px;
@@ -189,9 +185,7 @@ body {
   z-index: 10;
 }
 
-/* ==========================================
-   4. PÁGINA DE DETALHES DO PRODUTO (produto.html)
-   ========================================== */
+/* produto*/
 .product-image-card {
   position: relative;
   background: #343434;
@@ -323,4 +317,213 @@ body {
   background-color: #1e1e1e;
   color: #ffffff;
   transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+    .page-container {
+        width: 100%;
+        padding: 30px 16px;
+    }
+
+    .logo h1 {
+        font-size: 58px;
+    }
+
+    .nav-bar {
+        padding: 14px 10px;
+    }
+
+    .nav-bar ul {
+        gap: 35px;
+        flex-wrap: wrap;
+    }
+
+    .nav-bar a {
+        font-size: 13px;
+    }
+
+    .hero-section {
+        min-height: auto;
+        padding: 30px 50px 30px 20px;
+    }
+
+    .cards-scroll-container {
+        gap: 18px;
+        padding: 15px 5px;
+    }
+
+    .product-card {
+        width: 240px;
+        min-width: 240px;
+    }
+
+    .card-image {
+        height: 280px;
+    }
+
+    .product-image-card {
+        padding: 50px 40px;
+    }
+
+    .product-img {
+        width: 100%;
+        max-width: 384px;
+        height: auto;
+        aspect-ratio: 384 / 447;
+    }
+}
+
+@media (max-width: 600px) {
+    .page-container {
+        width: 100%;
+        padding: 20px 12px;
+    }
+
+    .header {
+        padding: 15px 0;
+    }
+
+    .logo {
+        align-items: center;
+        padding: 0 10px;
+    }
+
+    .logo h1 {
+        font-size: clamp(38px, 12vw, 58px);
+        line-height: 1;
+        text-align: center;
+    }
+
+    .logo .registered-mark {
+        font-size: 7px;
+        padding: 1px 3px;
+        margin-left: 4px;
+        margin-top: 4px;
+    }
+
+    .nav-bar {
+        padding: 12px 8px;
+    }
+
+    .nav-bar ul {
+        gap: 12px 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav-bar a {
+        font-size: 10px;
+    }
+
+    .hero-section {
+        min-height: auto;
+        padding: 20px 10px;
+    }
+
+    .cards-scroll-container {
+        width: 100%;
+        gap: 14px;
+        padding: 10px 4px 20px;
+        overflow-x: auto;
+    }
+
+    .product-card {
+        width: min(75vw, 260px);
+        min-width: min(75vw, 260px);
+    }
+
+    .card-image {
+        height: min(90vw, 300px);
+    }
+
+    .card-content {
+        padding: 13px;
+    }
+
+    .product-title {
+        font-size: 14px;
+    }
+
+    .price {
+        font-size: 16px;
+    }
+
+    .btn-arrow {
+        right: 10px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .product-image-card {
+        width: 100%;
+        padding: 45px 20px;
+        border-radius: 24px;
+    }
+
+    .product-img {
+        width: 100%;
+        max-width: 384px;
+        height: auto;
+        aspect-ratio: 384 / 447;
+    }
+
+    .view-badge {
+        top: 14px;
+        left: 14px;
+        font-size: 9px;
+        padding: 5px 10px;
+    }
+
+    .btn-toggle-floating {
+        right: 14px;
+        bottom: 14px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .btn-size {
+        min-width: 46px;
+        height: 40px;
+        padding: 0 12px;
+        font-size: 11px;
+    }
+
+    .btn-comprar,
+    .btn-carrinho {
+        width: 100%;
+        padding: 15px 20px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 380px) {
+    .logo h1 {
+        font-size: 34px;
+    }
+
+    .nav-bar ul {
+        gap: 10px 14px;
+    }
+
+    .nav-bar a {
+        font-size: 9px;
+    }
+
+    .product-card {
+        width: 72vw;
+        min-width: 72vw;
+    }
+
+    .card-image {
+        height: 72vw;
+    }
+
+    .product-image-card {
+        padding: 40px 14px;
+    }
+
+    .btn-comprar,
+    .btn-carrinho {
+        font-size: 11px;
+    }
 }
