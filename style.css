@@ -3,7 +3,7 @@
    ========================================== */
 @font-face {
   font-family: 'Akira Expanded';
-  src: url('AkiraExpanded.otf') format('opentype');
+  src: url('/assets/AkiraExpanded.otf') format('opentype');
   font-weight: 800;
   font-style: normal;
   font-display: swap;
