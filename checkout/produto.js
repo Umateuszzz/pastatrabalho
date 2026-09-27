@@ -1,22 +1,13 @@
-// ==========================================
-// CONFIGURAÇÃO DO SUPABASE CLIENT
-// ==========================================
 const SUPABASE_URL = 'https://oszspwukqeksytxfcvkh.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9zenNwd3VrcWVrc3l0eGZjdmtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAyNjk2MTYsImV4cCI6MjEwNTg0NTYxNn0.HzuuFQ2B3Rl3L07yn5C5qva4C9aWrPtf9WY1kUfx4hI';
 
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// ==========================================
-// VARIÁVEIS GLOBAIS DE ESTADO
-// ==========================================
 let imgFrenteUrl = '';
 let imgCostasUrl = '';
 let mostrandoFrente = true;
 let tamanhoSelecionado = null;
 
-// ==========================================
-// 1. CARREGAR DETALHES DO PRODUTO (SUPABASE)
-// ==========================================
 async function carregarDetalhesProduto() {
   const params = new URLSearchParams(window.location.search);
   const produtoId = params.get('id');
@@ -27,7 +18,7 @@ async function carregarDetalhesProduto() {
     return;
   }
 
-  // Busca o produto no Supabase
+
   const { data: produto, error } = await supabaseClient
     .from('produtos')
     .select('*')
@@ -41,7 +32,7 @@ async function carregarDetalhesProduto() {
     return;
   }
 
-  // Preenche os dados na tela
+
   const nameEl = document.getElementById('product-name');
   const priceEl = document.getElementById('product-price');
   const installmentsEl = document.getElementById('product-installments');
@@ -63,9 +54,6 @@ async function carregarDetalhesProduto() {
   if (imgElement) imgElement.src = imgFrenteUrl;
 }
 
-// ==========================================
-// 2. LÓGICA DO CARD DE FOTO (FRENTE / COSTAS)
-// ==========================================
 function inicializarAlternadorImagem() {
   const btnToggle = document.getElementById('btn-toggle-img');
   const imgElement = document.getElementById('product-img');
@@ -90,9 +78,7 @@ function inicializarAlternadorImagem() {
   }
 }
 
-// ==========================================
-// 3. LÓGICA DE SELEÇÃO DE TAMANHO (P, M, G, GG)
-// ==========================================
+
 function inicializarSelecaoTamanhos() {
   const sizeButtons = document.querySelectorAll('.btn-size');
   const sizeText = document.getElementById('selected-size-text');
@@ -116,9 +102,7 @@ function inicializarSelecaoTamanhos() {
   });
 }
 
-// ==========================================
-// 4. AÇÕES DE COMPRA E CHECKOUT
-// ==========================================
+
 function inicializarBotoesAcao() {
   const btnComprar = document.querySelector('.btn-comprar');
   const btnCarrinho = document.querySelector('.btn-carrinho');
@@ -136,7 +120,7 @@ function inicializarBotoesAcao() {
     return true;
   }
 
-  // Ação ao clicar em "Comprar"
+
   if (btnComprar) {
     btnComprar.addEventListener('click', () => {
       if (!validarTamanho()) return;
@@ -151,15 +135,15 @@ function inicializarBotoesAcao() {
         imagem: imgFrenteUrl
       };
 
-      // Salva os dados no localStorage para serem consumidos no checkout.html
+      
       localStorage.setItem('moment_item', JSON.stringify(itemParaComprar));
 
-      // Redireciona para o checkout
+    
       window.location.href = 'checkout.html';
     });
   }
 
-  // Ação ao clicar em "Adicionar ao Carrinho"
+  
   if (btnCarrinho) {
     btnCarrinho.addEventListener('click', () => {
       if (!validarTamanho()) return;
@@ -169,9 +153,6 @@ function inicializarBotoesAcao() {
   }
 }
 
-// ==========================================
-// INICIALIZAÇÃO AO CARREGAR O DOM
-// ==========================================
 document.addEventListener('DOMContentLoaded', () => {
   carregarDetalhesProduto();
   inicializarAlternadorImagem();
