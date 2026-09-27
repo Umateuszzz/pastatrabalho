@@ -17,169 +17,161 @@
     }
   </style>
 </head>
+```html
 <body>
+    <div class="page-container product-page">
 
-  <div class="page-container">
-    <h1 style="font-family: 'Akira Expanded', sans-serif; font-size: 96px; font-weight: 800; margin-left: 384px;">
-      moment
-    </h1>
-    
-    <div style="align-items: center; display: flex; margin-top: 56px;">
-      
-      <!-- Container da Imagem Reestilizado com Badge e Botão Flutuante -->
-      <div class="product-image-card">
-        <!-- Tag flutuante mostrando a vista atual (Frente / Costas) -->
-        <span id="view-badge" class="view-badge">Frente</span>
+        <h1 class="product-logo">
+            moment
+        </h1>
 
-        <div class="image-wrapper">
-          <img id="product-img" class="product-img" src="" alt="Foto da Camisa" />
+        <div class="product-layout">
+
+            <div class="product-image-card">
+                <span id="view-badge" class="view-badge">Frente</span>
+
+                <div class="image-wrapper">
+                    <img
+                        id="product-img"
+                        class="product-img"
+                        src=""
+                        alt="Foto da Camisa"
+                    />
+                </div>
+
+                <button
+                    id="btn-toggle-img"
+                    class="btn-toggle-floating"
+                    type="button"
+                    aria-label="Alternar vista da imagem"
+                >
+                    <svg
+                        width="10"
+                        height="16"
+                        viewBox="0 0 7 12"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M1 11L6 6L1 1"
+                            stroke="#1E1E1E"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="product-details">
+
+                <h3 id="product-name" class="product-name">
+                    Carregando...
+                </h3>
+
+                <div class="product-price-row">
+                    <h3 id="product-price" class="product-price">
+                        R$ 0,00
+                    </h3>
+
+                    <h3 id="product-installments" class="product-installments">
+                        ou 3x de R$ 0,00
+                    </h3>
+                </div>
+
+                <div class="product-divider">
+                    <svg
+                        viewBox="0 0 669 1"
+                        preserveAspectRatio="none"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M0 0.5H669"
+                            stroke="black"
+                        />
+                    </svg>
+                </div>
+
+                <h3 class="shipping-info">
+                    Frete grátis a partir de R$ 299,00
+                </h3>
+
+                <div class="size-section">
+
+                    <h3 class="size-title">
+                        tamanho:
+                        <span id="selected-size-text"></span>
+                    </h3>
+
+                    <div id="sizes-container" class="sizes-container">
+
+                        <button
+                            type="button"
+                            class="btn-size"
+                            data-size="P"
+                        >
+                            P
+                        </button>
+
+                        <button
+                            type="button"
+                            class="btn-size"
+                            data-size="M"
+                        >
+                            M
+                        </button>
+
+                        <button
+                            type="button"
+                            class="btn-size"
+                            data-size="G"
+                        >
+                            G
+                        </button>
+
+                        <button
+                            type="button"
+                            class="btn-size"
+                            data-size="GG"
+                        >
+                            GG
+                        </button>
+
+                    </div>
+
+                    <p id="size-warning" class="size-warning">
+                        Por favor, selecione um tamanho antes de prosseguir.
+                    </p>
+
+                </div>
+
+                <div class="product-actions">
+
+                    <button
+                        type="button"
+                        id="btn-comprar-agora"
+                        class="btn-comprar"
+                    >
+                        Comprar
+                    </button>
+
+                    <button
+                        type="button"
+                        id="btn-add-carrinho"
+                        class="btn-carrinho"
+                    >
+                        ad. ao carrinho
+                    </button>
+
+                </div>
+
+            </div>
+
         </div>
-
-        <!-- Botão Seta Flutuante (Alterna entre Frente e Costas) -->
-        <button id="btn-toggle-img" class="btn-toggle-floating" type="button" aria-label="Alternar vista da imagem">
-          <svg width="10" height="16" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 11L6 6L1 1" stroke="#1E1E1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </button>
-      </div>
-
-      <!-- Detalhes do Produto -->
-      <div style="margin-left: 28px;">
-        <h3 id="product-name" style="font-family: 'Akira Expanded', sans-serif; font-size: 20px; font-weight: 800; text-transform: uppercase;">
-          Carregando...
-        </h3>
-
-        <div style="align-items: center; display: flex; margin: 80px 0 0 8px;">
-          <h3 id="product-price" style="font-family: 'Akira Expanded', sans-serif; font-size: 20px; font-weight: 800;">
-            R$ 0,00
-          </h3>
-          <h3 id="product-installments" style="font-family: 'Akira Expanded', sans-serif; font-size: 20px; font-weight: 800; margin-left: 224px;">
-            ou 3x de R$ 0,00
-          </h3>
-        </div>
-
-        <div style="margin: 56px 0 0 4px;">
-          <svg width="669" height="1" viewBox="0 0 669 1" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 0.5H669" stroke="black" />
-          </svg>
-        </div>
-
-        <h3 style="font-family: 'Akira Expanded', sans-serif; font-size: 20px; font-weight: 800; margin: 64px 0 0 8px;">
-          Frete grátis a partir de R$ 299,00
-        </h3>
-
-        <!-- Seleção de Tamanho -->
-        <div style="margin: 64px 0 0 14px;">
-          <h3 style="font-family: 'Akira Expanded', sans-serif; font-size: 20px; font-weight: 800;">
-            tamanho: <span id="selected-size-text" style="font-size: 16px; color: #666; margin-left: 8px;"></span>
-          </h3>
-
-          <div id="sizes-container" style="display: flex; gap: 12px; margin-top: 16px;">
-            <button type="button" class="btn-size" data-size="P">P</button>
-            <button type="button" class="btn-size" data-size="M">M</button>
-            <button type="button" class="btn-size" data-size="G">G</button>
-            <button type="button" class="btn-size" data-size="GG">GG</button>
-          </div>
-          
-          <!-- Mensagem de erro/aviso caso tente avançar sem tamanho -->
-          <p id="size-warning" style="color: #e74c3c; font-family: sans-serif; font-size: 14px; margin-top: 10px; display: none;">
-            Por favor, selecione um tamanho antes de prosseguir.
-          </p>
-        </div>
-
-        <!-- Botões de Ação Principais (Agora com IDs) -->
-        <div style="align-items: center; display: flex; margin: 40px 0 0 14px; gap: 32px;">
-          <button type="button" id="btn-comprar-agora" class="btn-comprar">
-            Comprar
-          </button>
-          <button type="button" id="btn-add-carrinho" class="btn-carrinho">
-            ad. ao carrinho
-          </button>
-        </div>
-      </div>
 
     </div>
-  </div>
-
-  <!-- 1. Primeiro carregamos a lógica do produto (Supabase, etc) -->
-  <script src="checkout/produto.js"></script>
-  
-  <!-- 2. Depois carregamos as funções do carrinho -->
-  <script src="checkout/cart.js"></script>
-
-  <!-- 3. Finalmente, a lógica que liga esta página ao carrinho -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      let tamanhoSelecionado = null;
-      const botoesTamanho = document.querySelectorAll('.btn-size');
-      const textoTamanho = document.getElementById('selected-size-text');
-      const avisoTamanho = document.getElementById('size-warning');
-      const btnAddCarrinho = document.getElementById('btn-add-carrinho');
-      const btnComprarAgora = document.getElementById('btn-comprar-agora');
-
-      // Lógica para selecionar o tamanho
-      botoesTamanho.forEach(botao => {
-        botao.addEventListener('click', function() {
-          // Remove a classe selecionado de todos os botões
-          botoesTamanho.forEach(b => b.classList.remove('selecionado'));
-          
-          // Adiciona a classe apenas no botão clicado
-          this.classList.add('selecionado');
-          
-          // Guarda o tamanho escolhido
-          tamanhoSelecionado = this.getAttribute('data-size');
-          textoTamanho.innerText = tamanhoSelecionado;
-          
-          // Esconde o aviso de erro, se estiver visível
-          avisoTamanho.style.display = 'none';
-        });
-      });
-
-      // Função para extrair e formatar o produto para o carrinho
-      function adicionarProdutoAoCarrinho() {
-        if (!tamanhoSelecionado) {
-          avisoTamanho.style.display = 'block';
-          return false; // Interrompe a função se não tiver tamanho
-        }
-
-        // Lê o preço da tela e transforma num número (Ex: "R$ 129,90" vira 129.90)
-        let precoTexto = document.getElementById('product-price').innerText;
-        let precoNumero = parseFloat(precoTexto.replace('R$', '').replace(/\./g, '').replace(',', '.').trim()) || 0;
-
-        const produtoParaCarrinho = {
-          // Gera um ID baseado no nome e tamanho para diferenciar no carrinho
-          id: document.getElementById('product-name').innerText.trim().toLowerCase().replace(/\s/g, '-') + '-' + tamanhoSelecionado,
-          nome: document.getElementById('product-name').innerText,
-          preco: precoNumero,
-          tamanho: tamanhoSelecionado,
-          quantidade: 1,
-          imagem: document.getElementById('product-img').src
-        };
-
-        // Usa a função do seu cart.js para guardar na memória
-        MomentCart.adicionar(produtoParaCarrinho);
-        return true;
-      }
-
-      // Evento de clique: Adicionar ao Carrinho
-      btnAddCarrinho.addEventListener('click', function(e) {
-        e.preventDefault();
-        const sucesso = adicionarProdutoAoCarrinho();
-        if (sucesso) {
-          window.location.href = 'carrinho.html';
-        }
-      });
-
-      // Evento de clique: Comprar Agora
-      btnComprarAgora.addEventListener('click', function(e) {
-        e.preventDefault();
-        const sucesso = adicionarProdutoAoCarrinho();
-        if (sucesso) {
-          // O botão de comprar também leva para o carrinho (ou direto para o checkout, se preferir)
-          window.location.href = 'carrinho.html';
-        }
-      });
-    });
-  </script>
 </body>
+```
+
 </html>

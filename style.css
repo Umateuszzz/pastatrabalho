@@ -527,3 +527,306 @@ body {
         font-size: 11px;
     }
 }
+.product-page {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.product-logo {
+    font-family: 'Akira Expanded', sans-serif;
+    font-size: 96px;
+    font-weight: 800;
+    margin: 0 0 56px 384px;
+    line-height: 1;
+}
+
+.product-layout {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.product-details {
+    margin-left: 28px;
+    flex: 1;
+    min-width: 0;
+}
+
+.product-name {
+    font-family: 'Akira Expanded', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.product-price-row {
+    display: flex;
+    align-items: center;
+    margin: 80px 0 0 8px;
+}
+
+.product-price,
+.product-installments {
+    font-family: 'Akira Expanded', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.product-installments {
+    margin-left: 224px;
+}
+
+.product-divider {
+    width: 100%;
+    max-width: 669px;
+    height: 1px;
+    margin: 56px 0 0 4px;
+}
+
+.product-divider svg {
+    display: block;
+    width: 100%;
+    height: 1px;
+}
+
+.shipping-info {
+    font-family: 'Akira Expanded', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    margin: 64px 0 0 8px;
+}
+
+.size-section {
+    margin: 64px 0 0 14px;
+}
+
+.size-title {
+    font-family: 'Akira Expanded', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.size-title span {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: #666;
+    margin-left: 8px;
+}
+
+.sizes-container {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.size-warning {
+    color: #e74c3c;
+    font-family: sans-serif;
+    font-size: 14px;
+    margin-top: 10px;
+    display: none;
+}
+
+.product-actions {
+    display: flex;
+    align-items: center;
+    margin: 40px 0 0 14px;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 1000px) {
+
+    .product-logo {
+        margin-left: 0;
+        text-align: center;
+        font-size: clamp(60px, 9vw, 96px);
+    }
+
+    .product-layout {
+        align-items: flex-start;
+    }
+
+    .product-image-card {
+        padding: 50px 35px;
+    }
+
+    .product-details {
+        margin-left: 20px;
+    }
+
+    .product-installments {
+        margin-left: 50px;
+    }
+
+    .product-divider {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .product-page {
+        padding: 20px 14px;
+    }
+
+    .product-logo {
+        font-size: clamp(42px, 13vw, 70px);
+        margin: 0 0 30px;
+        text-align: center;
+    }
+
+    .product-layout {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 30px;
+    }
+
+    .product-image-card {
+        width: 100%;
+        padding: 35px 20px;
+        border-radius: 24px;
+    }
+
+    .image-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .product-img {
+        width: 100%;
+        max-width: 384px;
+        height: auto;
+        aspect-ratio: 384 / 447;
+        object-fit: cover;
+    }
+
+    .product-details {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .product-name {
+        font-size: 17px;
+    }
+
+    .product-price-row {
+        justify-content: space-between;
+        margin: 35px 0 0;
+        padding: 0 4px;
+        gap: 20px;
+    }
+
+    .product-price,
+    .product-installments {
+        font-size: 16px;
+    }
+
+    .product-installments {
+        margin-left: 0;
+        text-align: right;
+    }
+
+    .product-divider {
+        width: 100%;
+        margin: 35px 0 0;
+    }
+
+    .shipping-info {
+        font-size: 16px;
+        margin: 35px 0 0;
+    }
+
+    .size-section {
+        margin: 35px 0 0;
+    }
+
+    .size-title {
+        font-size: 16px;
+    }
+
+    .sizes-container {
+        gap: 10px;
+        margin-top: 14px;
+    }
+
+    .btn-size {
+        min-width: 48px;
+        height: 42px;
+        padding: 0 12px;
+        font-size: 12px;
+    }
+
+    .product-actions {
+        width: 100%;
+        margin: 30px 0 0;
+        gap: 12px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-comprar,
+    .btn-carrinho {
+        width: 100%;
+        min-height: 52px;
+        padding: 15px 20px;
+        font-size: 13px;
+    }
+
+    .view-badge {
+        top: 14px;
+        left: 14px;
+    }
+
+    .btn-toggle-floating {
+        right: 14px;
+        bottom: 14px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .product-page {
+        padding: 16px 10px;
+    }
+
+    .product-logo {
+        font-size: 38px;
+        margin-bottom: 25px;
+    }
+
+    .product-layout {
+        gap: 24px;
+    }
+
+    .product-image-card {
+        padding: 30px 12px;
+        border-radius: 20px;
+    }
+
+    .product-name {
+        font-size: 15px;
+    }
+
+    .product-price,
+    .product-installments {
+        font-size: 13px;
+    }
+
+    .shipping-info {
+        font-size: 14px;
+    }
+
+    .size-title {
+        font-size: 14px;
+    }
+
+    .btn-size {
+        min-width: 44px;
+        height: 40px;
+    }
+}
