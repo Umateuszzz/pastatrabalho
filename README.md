@@ -1,6 +1,6 @@
 # Moment Store
 
-**Nome:** [seu nome]
+**Nome:** Mateus, Suzane e Elvis
 **Disciplina:** Front-End I — Unilavras
 **Professor:** João Marcelo de Almeida Garcia
 
